@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Calendar, CheckSquare, List, Tag, Trash, Type } from "react-feather";
-import { colorsList } from "../../../Helper/Util";
-import Modal from "../../Modal/Modal";
-import CustomInput from "../../CustomInput/CustomInput";
-
-import "./CardInfo.css";
-import { ICard, ILabel, ITask } from "../../../Interfaces/Kanban";
-import Chip from "../../Common/Chip";
+import React, { useEffect, useState } from 'react';
+import { Calendar, CheckSquare, List, Tag, Trash, Type } from 'react-feather';
+import CustomInput from '../../CustomInput/CustomInput';
+import './CardInfo.css';
+import { colorsList } from '../../../../Helper/Util';
+import { ICard, ILabel, ITask } from '../../../../Interfaces/Kanban';
+import Chip from '../../Common/Chip';
+import Modal from '../../Modal/Modal';
 interface CardInfoProps {
   onClose: () => void;
   card: ICard;
@@ -15,7 +14,7 @@ interface CardInfoProps {
 }
 function CardInfo(props: CardInfoProps) {
   const { onClose, card, boardId, updateCard } = props;
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState('');
   const [cardValues, setCardValues] = useState<ICard>({
     ...card,
   });
@@ -30,11 +29,11 @@ function CardInfo(props: CardInfoProps) {
 
   const addLabel = (label: ILabel) => {
     const index = cardValues.labels.findIndex(
-      (item) => item.text === label.text,
+      (item) => item.text === label.text
     );
     if (index > -1) return; //if label text already exist then return
 
-    setSelectedColor("");
+    setSelectedColor('');
     setCardValues({
       ...cardValues,
       labels: [...cardValues.labels, label],
@@ -43,7 +42,7 @@ function CardInfo(props: CardInfoProps) {
 
   const removeLabel = (label: ILabel) => {
     const tempLabels = cardValues.labels.filter(
-      (item) => item.text !== label.text,
+      (item) => item.text !== label.text
     );
 
     setCardValues({
@@ -91,7 +90,7 @@ function CardInfo(props: CardInfoProps) {
   const calculatePercent = () => {
     if (!cardValues.tasks?.length) return 0;
     const completed = cardValues.tasks?.filter(
-      (item) => item.completed,
+      (item) => item.completed
     )?.length;
     return (completed / cardValues.tasks?.length) * 100;
   };
@@ -114,52 +113,52 @@ function CardInfo(props: CardInfoProps) {
 
   return (
     <Modal onClose={onClose}>
-      <div className="cardinfo">
-        <div className="cardinfo-box">
-          <div className="cardinfo-box-title">
+      <div className='cardinfo'>
+        <div className='cardinfo-box'>
+          <div className='cardinfo-box-title'>
             <Type />
             <p>Title</p>
           </div>
           <CustomInput
             defaultValue={cardValues.title}
             text={cardValues.title}
-            placeholder="Enter Title"
+            placeholder='Enter Title'
             onSubmit={updateTitle}
           />
         </div>
 
-        <div className="cardinfo-box">
-          <div className="cardinfo-box-title">
+        <div className='cardinfo-box'>
+          <div className='cardinfo-box-title'>
             <List />
             <p>Description</p>
           </div>
           <CustomInput
             defaultValue={cardValues.desc}
-            text={cardValues.desc || "Add a Description"}
-            placeholder="Enter description"
+            text={cardValues.desc || 'Add a Description'}
+            placeholder='Enter description'
             onSubmit={updateDesc}
           />
         </div>
 
-        <div className="cardinfo-box">
-          <div className="cardinfo-box-title">
+        <div className='cardinfo-box'>
+          <div className='cardinfo-box-title'>
             <Calendar />
             <p>Date</p>
           </div>
           <input
-            type="date"
+            type='date'
             defaultValue={cardValues.date}
             min={new Date().toISOString().substr(0, 10)}
             onChange={(event) => updateDate(event.target.value)}
           />
         </div>
 
-        <div className="cardinfo-box">
-          <div className="cardinfo-box-title">
+        <div className='cardinfo-box'>
+          <div className='cardinfo-box-title'>
             <Tag />
             <p>Labels</p>
           </div>
-          <div className="cardinfo-box-labels">
+          <div className='cardinfo-box-labels'>
             {cardValues.labels?.map((item, index) => (
               <Chip key={index} item={item} removeLabel={removeLabel} />
             ))}
@@ -169,52 +168,52 @@ function CardInfo(props: CardInfoProps) {
               <li
                 key={index}
                 style={{ backgroundColor: item }}
-                className={selectedColor === item ? "li-active" : ""}
+                className={selectedColor === item ? 'li-active' : ''}
                 onClick={() => setSelectedColor(item)}
               />
             ))}
           </ul>
           <CustomInput
-            text="Add Label"
-            placeholder="Enter label text"
+            text='Add Label'
+            placeholder='Enter label text'
             onSubmit={(value: string) =>
               addLabel({ color: selectedColor, text: value })
             }
           />
         </div>
 
-        <div className="cardinfo-box">
-          <div className="cardinfo-box-title">
+        <div className='cardinfo-box'>
+          <div className='cardinfo-box-title'>
             <CheckSquare />
             <p>Tasks</p>
           </div>
-          <div className="cardinfo-box-progress-bar">
+          <div className='cardinfo-box-progress-bar'>
             <div
-              className="cardinfo-box-progress"
+              className='cardinfo-box-progress'
               style={{
                 width: `${calculatedPercent}%`,
-                backgroundColor: calculatedPercent === 100 ? "limegreen" : "",
+                backgroundColor: calculatedPercent === 100 ? 'limegreen' : '',
               }}
             />
           </div>
-          <div className="cardinfo-box-task-list">
+          <div className='cardinfo-box-task-list'>
             {cardValues.tasks?.map((item) => (
-              <div key={item.id} className="cardinfo-box-task-checkbox">
+              <div key={item.id} className='cardinfo-box-task-checkbox'>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   defaultChecked={item.completed}
                   onChange={(event) =>
                     updateTask(item.id, event.target.checked)
                   }
                 />
-                <p className={item.completed ? "completed" : ""}>{item.text}</p>
+                <p className={item.completed ? 'completed' : ''}>{item.text}</p>
                 <Trash onClick={() => removeTask(item.id)} />
               </div>
             ))}
           </div>
           <CustomInput
-            text={"Add a Task"}
-            placeholder="Enter task"
+            text={'Add a Task'}
+            placeholder='Enter task'
             onSubmit={addTask}
           />
         </div>
