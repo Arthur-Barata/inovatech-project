@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { MoreHorizontal } from "react-feather";
+import React, { useState } from 'react';
+import { MoreHorizontal } from 'react-feather';
 
-import Card from "../Card/Card";
-import Dropdown from "../Dropdown/Dropdown";
-import CustomInput from "../CustomInput/CustomInput";
+import Card from '../Card/Card';
+import Dropdown from '../Dropdown/Dropdown';
+import CustomInput from '../CustomInput/CustomInput';
 
-import "./Board.css";
-import { IBoard, ICard } from "../../Interfaces/Kanban";
+import './Board.css';
+import { IBoard, ICard } from '../../../Interfaces/Kanban';
 
 interface BoardProps {
   board: IBoard;
@@ -30,21 +30,21 @@ function Board(props: BoardProps) {
   } = props;
   const [showDropdown, setShowDropdown] = useState(false);
   return (
-    <div className="board">
-      <div className="board-inner" key={board?.id}>
-        <div className="board-header">
-          <p className="board-header-title">
+    <div className='board'>
+      <div className='board-inner' key={board?.id}>
+        <div className='board-header'>
+          <p className='board-header-title'>
             {board?.title}
             <span>{board?.cards?.length || 0}</span>
           </p>
           <div
-            className="board-header-title-more"
+            className='board-header-title-more'
             onClick={() => setShowDropdown(true)}
           >
             <MoreHorizontal />
             {showDropdown && (
               <Dropdown
-                class="board-dropdown"
+                class='board-dropdown'
                 onClose={() => setShowDropdown(false)}
               >
                 <p onClick={() => removeBoard(board?.id)}>Delete Board</p>
@@ -52,7 +52,7 @@ function Board(props: BoardProps) {
             )}
           </div>
         </div>
-        <div className="board-cards custom-scroll">
+        <div className='board-cards custom-scroll'>
           {board?.cards?.map((item) => (
             <Card
               key={item.id}
@@ -65,10 +65,10 @@ function Board(props: BoardProps) {
             />
           ))}
           <CustomInput
-            text="+ Add Card"
-            placeholder="Enter Card Title"
-            displayClass="board-add-card"
-            editClass="board-add-card-edit"
+            text='+ Add Card'
+            placeholder='Enter Card Title'
+            displayClass='board-add-card'
+            editClass='board-add-card-edit'
             onSubmit={(value: string) => addCard(board?.id, value)}
           />
         </div>

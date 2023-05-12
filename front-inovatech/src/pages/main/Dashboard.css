@@ -1,5 +1,4 @@
-body{
-  background-image: url("../asserts/images/background.jpg");
+body {
   /* background-size: 60%; */
   background-size: cover;
 }
@@ -17,14 +16,14 @@ body{
   position: sticky;
   top: 0;
   background: transparent;
-    box-shadow: none;
-    color: #fff;
-    display: inline-block;
-    font-size: 15px;
-    margin-left: 15px;
-    line-height: 36px;
-    margin-right: 8px;
-    padding: 0;
+  box-shadow: none;
+  color: #fff;
+  display: inline-block;
+  font-size: 15px;
+  margin-left: 15px;
+  line-height: 36px;
+  margin-right: 8px;
+  padding: 0;
 }
 
 .app-boards-container {
@@ -65,7 +64,7 @@ body{
 /*
  * scroll bar styling
  */
- *::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 12px;
 }
 
