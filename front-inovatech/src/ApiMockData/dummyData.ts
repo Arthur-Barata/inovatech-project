@@ -3,7 +3,7 @@ import { IBoard } from "../Interfaces/Kanban";
 export const ApiMockResponse: IBoard[] = [
   {
     id: 1651319512266.7095,
-    title: "Discover",
+    title: "Novos",
     cards: [
       {
         id: 1651319552926.0933,
@@ -28,7 +28,7 @@ export const ApiMockResponse: IBoard[] = [
   },
   {
     id: 1651319523126.113,
-    title: "Doing",
+    title: "Em progresso",
     cards: [
       {
         id: 1651319672685.5078,
@@ -43,7 +43,7 @@ export const ApiMockResponse: IBoard[] = [
   },
   {
     id: 1651319530017.122,
-    title: "In-Review",
+    title: "Para Revisão",
     cards: [
       {
         id: 1651319677070.0732,
@@ -56,7 +56,7 @@ export const ApiMockResponse: IBoard[] = [
   },
   {
     id: 1651319535931.4182,
-    title: "Completed",
+    title: "Finalizado",
     cards: [
       {
         id: 1651319680948.0479,

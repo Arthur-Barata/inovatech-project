@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
-import {
-  fetchBoardList,
-  updateLocalStorageBoards,
-} from '../../Helper/APILayers';
-import { IBoard, ICard } from '../../Interfaces/Kanban';
-import Board from '../../shared/components/Board/Board';
-import CustomInput from '../../shared/components/CustomInput/CustomInput';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useEffect, useState } from "react";
+import { ApiMockResponse } from "../../ApiMockData/dummyData";
+import { updateLocalStorageBoards } from "../../Helper/APILayers";
+import { IBoard, ICard } from "../../Interfaces/Kanban";
+import Board from "../../shared/components/Board/Board";
+import CustomInput from "../../shared/components/CustomInput/CustomInput";
 import {
   Boards,
   BoardsContainer,
   BoardsLast,
   Container,
   MainTitle,
-} from './styles.ts';
-import './teste.css';
+} from "./styles";
+import "./teste.css";
 
 function Dashboard() {
   const [boards, setBoards] = useState<IBoard[]>([]);
@@ -22,8 +21,7 @@ function Dashboard() {
   }, []);
 
   async function fetchData() {
-    const boards: IBoard[] = await fetchBoardList();
-    setBoards(boards);
+    setBoards(ApiMockResponse);
   }
   const [targetCard, setTargetCard] = useState({
     boardId: 0,
@@ -58,9 +56,9 @@ function Dashboard() {
       id: Date.now() + Math.random() * 2,
       title,
       labels: [],
-      date: '',
+      date: "",
       tasks: [],
-      desc: '',
+      desc: "",
     });
     setBoards(tempBoardsList);
   };
@@ -144,10 +142,11 @@ function Dashboard() {
   }, [boards]);
   return (
     <Container>
-      <MainTitle>
-        <h1>Trello Kanban Board</h1>
-      </MainTitle>
       <BoardsContainer>
+        <MainTitle>
+          <DashboardIcon />
+          Dashborad:
+        </MainTitle>
         <Boards>
           {boards.map((item) => (
             <Board
@@ -163,11 +162,11 @@ function Dashboard() {
           ))}
           <BoardsLast>
             <CustomInput
-              displayClass='app-boards-add-board'
-              editClass='app-boards-add-board-edit'
-              placeholder='Enter Board Name'
-              text='Add Board'
-              buttonText='Add Board'
+              displayClass="app-boards-add-board"
+              editClass="app-boards-add-board-edit"
+              placeholder="Enter Board Name"
+              text="Add Board"
+              buttonText="Add Board"
               onSubmit={addboardHandler}
             />
           </BoardsLast>

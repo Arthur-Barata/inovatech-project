@@ -1,19 +1,22 @@
 .custom-input {
   width: 100%;
+  box-sizing: border-box;
 }
 
 .custom-input-display {
   padding: 6px 12px;
   border-radius: 3px;
   background-color: #eee;
-  color: #000;
+  color: #17394d;
   cursor: pointer;
   width: fit-content;
   transition: 200ms;
+  box-sizing: border-box;
 }
 
 .custom-input-display:hover {
-  background-color: #ddd;
+  background-color: #0079bf;
+  color: white;
 }
 
 .custom-input-edit {

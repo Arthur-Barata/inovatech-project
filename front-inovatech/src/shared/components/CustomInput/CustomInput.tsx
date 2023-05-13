@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { X } from "react-feather";
 
@@ -11,10 +11,12 @@ interface CustomInputProps {
   placeholder?: string;
   defaultValue?: string;
   buttonText?: string;
+  onClick?: (value: string) => void;
 }
 function CustomInput(props: CustomInputProps) {
   const {
     text,
+    onClick,
     onSubmit,
     displayClass,
     editClass,
@@ -49,7 +51,9 @@ function CustomInput(props: CustomInputProps) {
             autoFocus
           />
           <div className="custom-input-edit-footer">
-            <button type="submit">{buttonText || "Add"}</button>
+            <button onClick={() => onClick} type="submit">
+              {buttonText || "Add"}
+            </button>
             <X onClick={() => setIsCustomInput(false)} className="closeIcon" />
           </div>
         </form>

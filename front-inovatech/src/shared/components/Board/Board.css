@@ -2,31 +2,47 @@
   min-width: 290px;
   width: 290px;
   height: 100%;
-  overflow-y: auto;
   flex-basis: 290px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  
-  
+  position: relative;
   color: #17394d;
+  overflow-y: auto;
 }
-.board-inner{
-  background-color: rgb(223 227 230 / 55%);
-  padding: 15px;
+.board-inner {
+  background-color: rgba(223, 226, 230, 255);
+  padding: 0px 15px;
   border-radius: 3px;
+
+  overflow: scroll;
+  height: 30rem;
+  overflow-x: hidden;
 }
 .board-header {
+  position: sticky;
   display: flex;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(223, 226, 230, 255);
   justify-content: space-between;
   align-items: center;
   padding-bottom: 5px;
 }
-
+.board-footer-with {
+  position: sticky !important;
+  display: flex;
+  bottom: 0 !important;
+  background-color: rgba(223, 226, 230, 255);
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+}
 .board-header-title {
   font-weight: bold;
   font-size: 1rem;
   display: flex;
+
   gap: 5px;
   align-items: center;
 }
@@ -41,7 +57,9 @@
 }
 
 .board-dropdown {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   padding: 10px;
   width: 150px !important;
   cursor: default;
@@ -58,12 +76,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: auto;
 }
 
 .board-add-card {
   background-color: #fff;
   color: #000;
+
   border-radius: 10px;
   box-shadow: 1px 1px 0 1px rgba(0, 0, 0, 0.12);
   width: 100%;
