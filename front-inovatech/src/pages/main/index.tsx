@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   fetchBoardList,
   updateLocalStorageBoards,
-} from "../../Helper/APILayers";
-import { IBoard, ICard } from "../../Interfaces/Kanban";
-import Board from "../../shared/components/Board/Board";
-import CustomInput from "../../shared/components/CustomInput/CustomInput";
-import "./Dashboard.css";
+} from '../../Helper/APILayers';
+import { IBoard, ICard } from '../../Interfaces/Kanban';
+import Board from '../../shared/components/Board/Board';
+import CustomInput from '../../shared/components/CustomInput/CustomInput';
+import {
+  Boards,
+  BoardsContainer,
+  BoardsLast,
+  Container,
+  MainTitle,
+} from './styles.ts';
+import './teste.css';
 
 function Dashboard() {
   const [boards, setBoards] = useState<IBoard[]>([]);
@@ -51,9 +58,9 @@ function Dashboard() {
       id: Date.now() + Math.random() * 2,
       title,
       labels: [],
-      date: "",
+      date: '',
       tasks: [],
-      desc: "",
+      desc: '',
     });
     setBoards(tempBoardsList);
   };
@@ -136,12 +143,12 @@ function Dashboard() {
     updateLocalStorageBoards(boards);
   }, [boards]);
   return (
-    <div className="app">
-      <div className="app-nav">
+    <Container>
+      <MainTitle>
         <h1>Trello Kanban Board</h1>
-      </div>
-      <div className="app-boards-container">
-        <div className="app-boards">
+      </MainTitle>
+      <BoardsContainer>
+        <Boards>
           {boards.map((item) => (
             <Board
               key={item.id}
@@ -154,19 +161,19 @@ function Dashboard() {
               updateCard={updateCard}
             />
           ))}
-          <div className="app-boards-last">
+          <BoardsLast>
             <CustomInput
-              displayClass="app-boards-add-board"
-              editClass="app-boards-add-board-edit"
-              placeholder="Enter Board Name"
-              text="Add Board"
-              buttonText="Add Board"
+              displayClass='app-boards-add-board'
+              editClass='app-boards-add-board-edit'
+              placeholder='Enter Board Name'
+              text='Add Board'
+              buttonText='Add Board'
               onSubmit={addboardHandler}
             />
-          </div>
-        </div>
-      </div>
-    </div>
+          </BoardsLast>
+        </Boards>
+      </BoardsContainer>
+    </Container>
   );
 }
 

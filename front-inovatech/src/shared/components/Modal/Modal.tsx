@@ -1,20 +1,12 @@
-import React from "react";
-
-import "./Modal.css";
+import { ModalContent, ModalStyle } from './styles';
 
 function Modal(props: any) {
   return (
-    <div
-      className="modal"
-      onClick={() => (props.onClose ? props.onClose() : "")}
-    >
-      <div
-        className="modal-content custom-scroll"
-        onClick={(event) => event.stopPropagation()}
-      >
+    <ModalStyle onClick={() => (props.onClose ? props.onClose() : '')}>
+      <ModalContent onClick={(event) => event.stopPropagation()}>
         {props.children}
-      </div>
-    </div>
+      </ModalContent>
+    </ModalStyle>
   );
 }
 
