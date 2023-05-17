@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MoreHorizontal } from "react-feather";
-import CustomInput from "../../components/CustomInput/CustomInput";
 import Card from "../Card/Card";
 import Dropdown from "../Dropdown/Dropdown";
 
@@ -35,6 +34,12 @@ function Board(props: BoardProps) {
           <p className="board-header-title">
             {board?.title}
             <span>{board?.cards?.length || 0}</span>
+            <button
+              className="add-btn"
+              onClick={() => addCard(board?.id, "new")}
+            >
+              +
+            </button>
           </p>
           <div
             className="board-header-title-more"
@@ -64,16 +69,7 @@ function Board(props: BoardProps) {
             />
           ))}
         </div>
-        <div className="board-footer-with">
-          <CustomInput
-            text="+ Adicionar card"
-            buttonText="Adicionar"
-            placeholder="Enter Card Title"
-            displayClass="board-add-card"
-            editClass="board-add-card-edit"
-            onSubmit={(value: string) => addCard(board?.id, value)}
-          />
-        </div>
+        <div className="board-footer-with"></div>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar, CheckSquare, List, Tag, Trash, Type } from 'react-feather';
-import CustomInput from '../../CustomInput/CustomInput';
-import './CardInfo.css';
-import { colorsList } from '../../../../Helper/Util';
-import { ICard, ILabel, ITask } from '../../../../Interfaces/Kanban';
-import Chip from '../../Common/Chip';
-import Modal from '../../Modal/Modal';
+import { useEffect, useState } from "react";
+import { Calendar, CheckSquare, List, Tag, Trash, Type } from "react-feather";
+import { colorsList } from "../../../../Helper/Util";
+import { ICard, ILabel, ITask } from "../../../../Interfaces/Kanban";
+import Chip from "../../Common/Chip";
+import CustomInput from "../../CustomInput/CustomInput";
+import Modal from "../../Modal/Modal";
+import "./CardInfo.css";
 interface CardInfoProps {
   onClose: () => void;
   card: ICard;
@@ -14,7 +14,7 @@ interface CardInfoProps {
 }
 function CardInfo(props: CardInfoProps) {
   const { onClose, card, boardId, updateCard } = props;
-  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedColor, setSelectedColor] = useState("");
   const [cardValues, setCardValues] = useState<ICard>({
     ...card,
   });
@@ -33,7 +33,7 @@ function CardInfo(props: CardInfoProps) {
     );
     if (index > -1) return; //if label text already exist then return
 
-    setSelectedColor('');
+    setSelectedColor("");
     setCardValues({
       ...cardValues,
       labels: [...cardValues.labels, label],
@@ -113,52 +113,52 @@ function CardInfo(props: CardInfoProps) {
 
   return (
     <Modal onClose={onClose}>
-      <div className='cardinfo'>
-        <div className='cardinfo-box'>
-          <div className='cardinfo-box-title'>
+      <div className="cardinfo">
+        <div className="cardinfo-box">
+          <div className="cardinfo-box-title">
             <Type />
             <p>Title</p>
           </div>
           <CustomInput
             defaultValue={cardValues.title}
             text={cardValues.title}
-            placeholder='Enter Title'
+            placeholder="Enter Title"
             onSubmit={updateTitle}
           />
         </div>
 
-        <div className='cardinfo-box'>
-          <div className='cardinfo-box-title'>
+        <div className="cardinfo-box">
+          <div className="cardinfo-box-title">
             <List />
             <p>Description</p>
           </div>
           <CustomInput
             defaultValue={cardValues.desc}
-            text={cardValues.desc || 'Add a Description'}
-            placeholder='Enter description'
+            text={cardValues.desc || "Adicionar Descrição"}
+            placeholder="Enter description"
             onSubmit={updateDesc}
           />
         </div>
 
-        <div className='cardinfo-box'>
-          <div className='cardinfo-box-title'>
+        <div className="cardinfo-box">
+          <div className="cardinfo-box-title">
             <Calendar />
             <p>Date</p>
           </div>
           <input
-            type='date'
+            type="date"
             defaultValue={cardValues.date}
             min={new Date().toISOString().substr(0, 10)}
             onChange={(event) => updateDate(event.target.value)}
           />
         </div>
 
-        <div className='cardinfo-box'>
-          <div className='cardinfo-box-title'>
+        <div className="cardinfo-box">
+          <div className="cardinfo-box-title">
             <Tag />
-            <p>Labels</p>
+            <p>Flags</p>
           </div>
-          <div className='cardinfo-box-labels'>
+          <div className="cardinfo-box-labels">
             {cardValues.labels?.map((item, index) => (
               <Chip key={index} item={item} removeLabel={removeLabel} />
             ))}
@@ -168,52 +168,52 @@ function CardInfo(props: CardInfoProps) {
               <li
                 key={index}
                 style={{ backgroundColor: item }}
-                className={selectedColor === item ? 'li-active' : ''}
+                className={selectedColor === item ? "li-active" : ""}
                 onClick={() => setSelectedColor(item)}
               />
             ))}
           </ul>
           <CustomInput
-            text='Add Label'
-            placeholder='Enter label text'
+            text="Adicionar flag"
+            placeholder="Insira a flag"
             onSubmit={(value: string) =>
               addLabel({ color: selectedColor, text: value })
             }
           />
         </div>
 
-        <div className='cardinfo-box'>
-          <div className='cardinfo-box-title'>
+        <div className="cardinfo-box">
+          <div className="cardinfo-box-title">
             <CheckSquare />
             <p>Tasks</p>
           </div>
-          <div className='cardinfo-box-progress-bar'>
+          <div className="cardinfo-box-progress-bar">
             <div
-              className='cardinfo-box-progress'
+              className="cardinfo-box-progress"
               style={{
                 width: `${calculatedPercent}%`,
-                backgroundColor: calculatedPercent === 100 ? 'limegreen' : '',
+                backgroundColor: calculatedPercent === 100 ? "limegreen" : "",
               }}
             />
           </div>
-          <div className='cardinfo-box-task-list'>
+          <div className="cardinfo-box-task-list">
             {cardValues.tasks?.map((item) => (
-              <div key={item.id} className='cardinfo-box-task-checkbox'>
+              <div key={item.id} className="cardinfo-box-task-checkbox">
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   defaultChecked={item.completed}
                   onChange={(event) =>
                     updateTask(item.id, event.target.checked)
                   }
                 />
-                <p className={item.completed ? 'completed' : ''}>{item.text}</p>
+                <p className={item.completed ? "completed" : ""}>{item.text}</p>
                 <Trash onClick={() => removeTask(item.id)} />
               </div>
             ))}
           </div>
           <CustomInput
-            text={'Add a Task'}
-            placeholder='Enter task'
+            text={"Adicionar Task"}
+            placeholder="Insira a task"
             onSubmit={addTask}
           />
         </div>

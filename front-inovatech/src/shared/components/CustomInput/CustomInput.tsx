@@ -52,7 +52,7 @@ function CustomInput(props: CustomInputProps) {
           />
           <div className="custom-input-edit-footer">
             <button onClick={() => onClick} type="submit">
-              {buttonText || "Add"}
+              {buttonText || "Adicionar"}
             </button>
             <X onClick={() => setIsCustomInput(false)} className="closeIcon" />
           </div>
