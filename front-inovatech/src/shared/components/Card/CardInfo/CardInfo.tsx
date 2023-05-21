@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Calendar, CheckSquare, List, Tag, Trash, Type } from "react-feather";
 import { colorsList } from "../../../../Helper/Util";
-import { ICard, ILabel, ITask } from "../../../../Interfaces/Kanban";
+import { ICard, ILabel, ITask, ITaskAssignment } from "../../../../Interfaces/Kanban";
 import Chip from "../../Common/Chip";
 import CustomInput from "../../CustomInput/CustomInput";
 import Modal from "../../Modal/Modal";
 import "./CardInfo.css";
+import TaskAssignmentField from "../../TaskAssignment";
+import users from "../../../../ApiMockData/mockUser";
 interface CardInfoProps {
   onClose: () => void;
   card: ICard;
@@ -86,7 +88,33 @@ function CardInfo(props: CardInfoProps) {
       tasks,
     });
   };
+  const [assignedTasks, setAssignedTasks] = useState<{ [taskId: string]: string }>({});
 
+  const assignTasks: React.FC<ITaskAssignment> = ({ tasks, users }) => {
+    const handleTaskAssign = (taskId: string, userId: string) => {
+      setAssignedTasks(prevState => ({
+        ...prevState,
+        [taskId]: userId,
+      }));
+    };
+  
+    return (
+      <div>
+        {tasks.map(task => (
+          <div key={task.id}>
+            <h3>{task.id}</h3>
+            <TaskAssignmentField
+              taskId={task.text}
+              users={users}
+              onAssign={handleTaskAssign}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
+  
+    
   const calculatePercent = () => {
     if (!cardValues.tasks?.length) return 0;
     const completed = cardValues.tasks?.filter(
@@ -180,6 +208,10 @@ function CardInfo(props: CardInfoProps) {
               addLabel({ color: selectedColor, text: value })
             }
           />
+
+          <div>
+          {assignTasks({ tasks: cardValues.tasks, users: users })}
+          </div>
         </div>
 
         <div className="cardinfo-box">
