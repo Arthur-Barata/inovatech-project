@@ -102,7 +102,7 @@ function CardInfo(props: CardInfoProps) {
       <div>
         {tasks.map(task => (
           <div key={task.id}>
-            <h3>{task.id}</h3>
+            <h3>Selecione um usuário</h3>
             <TaskAssignmentField
               taskId={task.text}
               users={users}
