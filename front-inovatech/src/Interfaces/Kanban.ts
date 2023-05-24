@@ -27,6 +27,7 @@ export interface IBoard {
 export interface IUser {
   email: string;
   name: string;
+  senha?: string;
 }
 
 export interface TaskAssignmentFieldProps {

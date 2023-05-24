@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 export const StyledHeader = styled("div")<ContainerProps>(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  justifyContent: 'space-between',
   background: theme.palette.primary.main,
   height: "4rem",
   width: "100%",
