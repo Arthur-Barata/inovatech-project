@@ -121,6 +121,8 @@ function Dashboard() {
       0,
       sourceCard
     );
+
+
     setBoards(tempBoardsList);
 
     setTargetCard({

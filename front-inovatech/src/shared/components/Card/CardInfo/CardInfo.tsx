@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Calendar, CheckSquare, List, Tag, Trash, Type } from "react-feather";
+import { Calendar,  List, Tag,  Type } from "react-feather";
 import { colorsList } from "../../../../Helper/Util";
-import { ICard, ILabel, ITask, ITaskAssignment } from "../../../../Interfaces/Kanban";
+import { ICard, ILabel, ITaskAssignment } from "../../../../Interfaces/Kanban";
 import Chip from "../../Common/Chip";
 import CustomInput from "../../CustomInput/CustomInput";
 import Modal from "../../Modal/Modal";
@@ -53,75 +53,32 @@ function CardInfo(props: CardInfoProps) {
     });
   };
 
-  const addTask = (value: string) => {
-    const task: ITask = {
-      id: Date.now() + Math.random() * 2,
-      completed: false,
-      text: value,
-    };
-    setCardValues({
-      ...cardValues,
-      tasks: [...cardValues.tasks, task],
-    });
-  };
-
-  const removeTask = (id: number) => {
-    const tasks = [...cardValues.tasks];
-
-    const tempTasks = tasks.filter((item) => item.id !== id);
-    setCardValues({
-      ...cardValues,
-      tasks: tempTasks,
-    });
-  };
-
-  const updateTask = (id: number, value: boolean) => {
-    const tasks = [...cardValues.tasks];
-
-    const index = tasks.findIndex((item) => item.id === id);
-    if (index < 0) return;
-
-    tasks[index].completed = Boolean(value);
-
-    setCardValues({
-      ...cardValues,
-      tasks,
-    });
-  };
   const [assignedTasks, setAssignedTasks] = useState<{ [taskId: string]: string }>({});
 
-  const assignTasks: React.FC<ITaskAssignment> = ({ tasks, users }) => {
-    const handleTaskAssign = (taskId: string, userId: string) => {
+  const assignTasks: React.FC<ITaskAssignment> = ({ cardId, users }) => {
+    const handleTaskAssign = (cardId: string, userId: string) => {
       setAssignedTasks(prevState => ({
         ...prevState,
-        [taskId]: userId,
+        [cardId]: userId,
       }));
     };
   
     return (
-      <div>
-        {tasks.map(task => (
-          <div key={task.id}>
+  
+       
+          <div key={cardId}>
             <h3>Selecione um usuário</h3>
             <TaskAssignmentField
-              taskId={task.text}
+              taskId={cardId}
               users={users}
               onAssign={handleTaskAssign}
             />
           </div>
-        ))}
-      </div>
+   
+   
     );
   };
   
-    
-  const calculatePercent = () => {
-    if (!cardValues.tasks?.length) return 0;
-    const completed = cardValues.tasks?.filter(
-      (item) => item.completed
-    )?.length;
-    return (completed / cardValues.tasks?.length) * 100;
-  };
 
   const updateDate = (date: string) => {
     if (!date) return;
@@ -136,8 +93,6 @@ function CardInfo(props: CardInfoProps) {
     if (updateCard) updateCard(boardId, cardValues.id, cardValues);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardValues]);
-
-  const calculatedPercent = calculatePercent();
 
   return (
     <Modal onClose={onClose}>
@@ -210,45 +165,11 @@ function CardInfo(props: CardInfoProps) {
           />
 
           <div>
-          {assignTasks({ tasks: cardValues.tasks, users: users })}
+          {assignTasks({ cardId:card.id, users: users })}
           </div>
         </div>
 
-        <div className="cardinfo-box">
-          <div className="cardinfo-box-title">
-            <CheckSquare />
-            <p>Tasks</p>
-          </div>
-          <div className="cardinfo-box-progress-bar">
-            <div
-              className="cardinfo-box-progress"
-              style={{
-                width: `${calculatedPercent}%`,
-                backgroundColor: calculatedPercent === 100 ? "limegreen" : "",
-              }}
-            />
-          </div>
-          <div className="cardinfo-box-task-list">
-            {cardValues.tasks?.map((item) => (
-              <div key={item.id} className="cardinfo-box-task-checkbox">
-                <input
-                  type="checkbox"
-                  defaultChecked={item.completed}
-                  onChange={(event) =>
-                    updateTask(item.id, event.target.checked)
-                  }
-                />
-                <p className={item.completed ? "completed" : ""}>{item.text}</p>
-                <Trash onClick={() => removeTask(item.id)} />
-              </div>
-            ))}
-          </div>
-          <CustomInput
-            text={"Adicionar Task"}
-            placeholder="Insira a task"
-            onSubmit={addTask}
-          />
-        </div>
+      
       </div>
     </Modal>
   );

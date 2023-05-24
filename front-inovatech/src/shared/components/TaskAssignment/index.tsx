@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { TaskAssignmentFieldProps } from '../../../Interfaces/Kanban';
 import { StyledTaskAssignment } from './styles';
 import { MenuItem } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
+
 
 export const TaskAssignmentField: React.FC<TaskAssignmentFieldProps> = ({
   taskId,
@@ -10,22 +12,22 @@ export const TaskAssignmentField: React.FC<TaskAssignmentFieldProps> = ({
 }) => {
   const [selectedUserEmail, setSelectedUserEmail] = useState('');
 
-  const handleAssign = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleAssign = (event: SelectChangeEvent<unknown>) => {
     const email = event.target.value as string;
     setSelectedUserEmail(email);
     onAssign(taskId, email);
   };
 
   useEffect(() => {
-    const savedUserEmail = localStorage.getItem('selectedUserEmail');
+    const savedUserEmail = localStorage.getItem(taskId);
     if (savedUserEmail) {
       setSelectedUserEmail(savedUserEmail);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('selectedUserEmail', selectedUserEmail);
-  }, [selectedUserEmail]);
+    localStorage.setItem(taskId, selectedUserEmail);
+  }, [selectedUserEmail,taskId]);
 
   return (
     <StyledTaskAssignment

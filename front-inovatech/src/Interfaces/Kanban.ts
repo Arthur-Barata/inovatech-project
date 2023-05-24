@@ -31,12 +31,12 @@ export interface IUser {
 }
 
 export interface TaskAssignmentFieldProps {
-  taskId: string;
+  taskId: string | number;
   users: IUser[]; 
   onAssign: (taskId: string, userEmail: string) => void; 
 }
 
 export interface ITaskAssignment {
-  tasks: ITask[];
+  cardId: string | number;
   users: IUser[]
 }
