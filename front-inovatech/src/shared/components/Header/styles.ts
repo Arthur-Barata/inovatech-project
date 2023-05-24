@@ -5,12 +5,11 @@ export const StyledHeader = styled("div")<ContainerProps>(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   background: theme.palette.primary.main,
-  height: "6rem",
+  height: "4rem",
   width: "100%",
 }));
 
 export const StyledImg = styled("img")<ContainerProps>(() => ({
-  width: "10rem",
-  height: "7.5rem",
+  height: "5rem",
   paddingLeft: "1%",
 }));

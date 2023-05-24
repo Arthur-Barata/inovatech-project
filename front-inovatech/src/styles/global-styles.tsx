@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { createTheme } from "@mui/material/styles";
 
 export const globalStyle = {
@@ -10,6 +11,11 @@ export const globalStyle = {
   "box-sizing": "border-box",
 };
 
+export const Container = styled.div`
+  .typ {
+    height: 100vh;
+  }
+`;
 export const theme = createTheme({
   palette: {
     common: {
