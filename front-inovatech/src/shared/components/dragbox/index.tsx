@@ -7,11 +7,14 @@ interface TextBox {
   top: number;
   text: string;
 }
+interface Iprops {
+  label: string;
+  color: string;
+}
 
-const DragBox: React.FC = () => {
+const DragBox = (props: Iprops) => {
   const [textBoxes, setTextBoxes] = useState<TextBox[]>([]);
   const [counter, setCounter] = useState(0);
-  const [textBoxClassName, setTextBoxClassName] = useState("textbox");
   const [indexClicked, setIndexClicked] = useState(0);
 
   const createTextBox = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -38,6 +41,7 @@ const DragBox: React.FC = () => {
     };
 
     setTextBoxes((prevTextBoxes) => [...prevTextBoxes, newTextBox]);
+
     setCounter((prevCounter) => prevCounter + 1);
   };
 
@@ -92,15 +96,13 @@ const DragBox: React.FC = () => {
 
   return (
     <div className="app">
-      <div></div>
       <div
         className="board"
         onDoubleClick={createTextBox}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
-        <h1>Problemas para solução</h1>
-
+        <div className={`header-${props.color}`}>{props.label}</div>
         {textBoxes.map((textBox, index) => (
           <div
             key={textBox.id}

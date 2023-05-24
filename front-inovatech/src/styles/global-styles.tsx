@@ -1,34 +1,36 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 export const globalStyle = {
   body: {
     margin: 0,
     padding: 0,
+    display: "flex",
+    flexDirection: "column",
   },
-  'box-sizing': 'border-box',
+  "box-sizing": "border-box",
 };
 
 export const theme = createTheme({
   palette: {
     common: {
-      white: '#ffffff',
-      black: '#000000',
+      white: "#ffffff",
+      black: "#000000",
     },
     primary: {
-      dark: '#020d3f',
-      main: '#123449',
-      light: '#244B63',
-      contrastText: 'linear-gradient( #020d3f, #800080)',
+      dark: "#020d3f",
+      main: "#123449",
+      light: "#244B63",
+      contrastText: "linear-gradient( #020d3f, #800080)",
     },
     secondary: {
-      dark: '#777777',
-      main: '#909090',
-      light: '#ABABAB',
+      dark: "#777777",
+      main: "#909090",
+      light: "#ABABAB",
     },
     error: {
-      dark: '#FF554D',
-      main: '#E46962',
-      light: '#FFBA8F',
+      dark: "#FF554D",
+      main: "#E46962",
+      light: "#FFBA8F",
     },
   },
 });

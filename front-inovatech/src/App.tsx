@@ -1,6 +1,5 @@
 import { Fragment } from "react";
-import Dashboard from "./pages/main";
-import DragBox from "./pages/quickProblemSolving";
+import { MainRoutes } from "./routes";
 import { Footer } from "./shared/components/Footer";
 import { Header } from "./shared/components/Header";
 
@@ -8,8 +7,7 @@ function App() {
   return (
     <Fragment>
       <Header />
-      <DragBox />
-      <Dashboard />
+      <MainRoutes />
       <Footer />
     </Fragment>
   );

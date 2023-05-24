@@ -26,7 +26,6 @@ export const BoardsContainer = styled("div")<ContainerProps>(({ theme }) => ({
   overflowX: "scroll",
   overflowY: "hidden",
   height: "100%",
-  paddingTop: "20px",
 }));
 
 export const Boards = styled("div")<ContainerProps>(({ theme }) => ({
