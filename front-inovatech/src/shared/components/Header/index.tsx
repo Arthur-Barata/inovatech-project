@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { StyledHeader, StyledImg } from './styles';
+import { StyledButtonsHeader, StyledHeader, StyledImg } from './styles';
 import logo from '../../../assets/icons/logo.png';
+import { ButtonStyles } from "../Button/styles";
+import { DashboardButton, ProblemSolvingButton } from "../Button";
 
 
 export const Header = (props: {changeLog: any}) => {
@@ -10,11 +12,15 @@ export const Header = (props: {changeLog: any}) => {
   return (
     <StyledHeader>
       <a href="/"><StyledImg src={logo} /></a>
-      <button onClick={() => {
+      <StyledButtonsHeader>
+      <DashboardButton/>
+      <ProblemSolvingButton/>
+      </StyledButtonsHeader>
+      <ButtonStyles sx={{marginRight:'10rem'}} onClick={() => {
         changeLog()
         navigation('/login')
       }}
-      >Sair</button>
+      >Sair</ButtonStyles>
     </StyledHeader>
   );
 };
